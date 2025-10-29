@@ -1,0 +1,11 @@
+SELECT 
+    "ship-state" AS state,
+    SUM(amount) AS total_sales,
+    COUNT(*) AS order_count,
+    AVG(amount) AS avg_order_value,
+    SUM(qty) AS total_quantity
+FROM rawdevanand_handson
+WHERE "ship-state" IS NOT NULL
+GROUP BY "ship-state"
+ORDER BY total_sales ASC
+LIMIT 10;

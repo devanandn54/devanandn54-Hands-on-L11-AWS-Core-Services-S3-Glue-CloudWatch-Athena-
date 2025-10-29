@@ -1,0 +1,13 @@
+SELECT 
+    category,
+    style,
+    COUNT(*) AS order_count,
+    SUM(amount) AS total_sales,
+    AVG(amount) AS avg_sale_amount,
+    SUM(qty) AS total_quantity
+FROM rawdevanand_handson
+WHERE category IS NOT NULL 
+    AND style IS NOT NULL
+GROUP BY category, style
+ORDER BY total_sales DESC
+LIMIT 10;

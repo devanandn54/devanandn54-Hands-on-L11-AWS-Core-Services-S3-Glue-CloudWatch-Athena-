@@ -1,8 +1,8 @@
 # AWS Core Services Lab - ITCS 6190/8190
 
-**Name:** [Your Name]  
-**ID:** [Your ID]  
-**Date:** [Date]
+**Name:** Devanand Nagendrababu 
+**ID:** 801395558
+**Date:** 10/28/2025
 
 ## Overview
 
@@ -23,58 +23,82 @@ CSV File → S3 Bucket → Glue Crawler → Data Catalog → Athena Queries → 
 - `itcs6190-raw-data-[username]` - Raw CSV storage
 - `itcs6190-processed-data-[username]` - Query results
 
-![S3 Buckets](screenshots/s3_buckets.png)
-
 ### 2. IAM Role Configuration
 - **Role:** `GlueCrawlerRole-ITCS6190`
 - **Policies:** AWSGlueServiceRole, AmazonS3FullAccess
 
-![IAM Role](screenshots/iam_role.png)
+![IAM Role](iam_creation.png)
 
 ### 3. Glue Setup
 - **Database:** `ecommerce_db`
 - **Crawler:** `ecommerce-crawler`
 - **Table:** `rawdevanand_handson` (auto-generated schema)
 
+![Glue Database](db_glue.png)
+
+![Glue Crawler](crawler.png)
+
 ### 4. CloudWatch Monitoring
 Monitored crawler execution logs in `/aws-glue/crawlers`
 
-![CloudWatch Logs](screenshots/cloudwatch_logs.png)
+![CloudWatch Logs](cloudwatch.png)
 
 ### 5. Athena Queries
 Executed 5 analytical queries on the cataloged data.
 
-## SQL Queries
+![First Describe Command](first_describe_command.png)
+
+## SQL Queries & Results
 
 ### Query 1: Cumulative Sales Over Time
-**File:** [query1_cumulative_sales.sql](queries/query1_cumulative_sales.sql)  
-**Result:** [query1_results.csv](results/query1_results.csv)
+**File:** [Query_1_cumulative_sales](Query_1_cumulative_sales)
 
 Calculates running total of sales for 2022.
 
+![Query 1 Result](query_1_result.png)
+
+---
+
 ### Query 2: Geographic Hotspot Analysis
-**File:** [query2_geographic_hotspot.sql](queries/query2_geographic_hotspot.sql)  
-**Result:** [query2_results.csv](results/query2_results.csv)
+**File:** [Query2_geo_hotspot](Query2_geo_hotspot)
 
 Identifies states with lowest sales performance.
 
+![Query 2 Result](query_2.png)
+
+---
+
 ### Query 3: Category & Style Performance
-**File:** [query3_category_performance.sql](queries/query3_category_performance.sql)  
-**Result:** [query3_results.csv](results/query3_results.csv)
+**File:** [Query3_sales_performance](Query3_sales_performance)
 
 Analyzes sales by product category and style.
 
+![Query 3 Result](query_3.png)
+
+---
+
 ### Query 4: Top 3 Products by Category
-**File:** [query4_top_products.sql](queries/query4_top_products.sql)  
-**Result:** [query4_results.csv](results/query4_results.csv)
+**File:** [query4_top_3_sku](query4_top_3_sku)
 
 Ranks top 3 best-selling SKUs in each category.
 
+![Query 4 Result](query_4.png)
+
+---
+
 ### Query 5: Sales Sequence Analysis
-**File:** [query5_sales_growth.sql](queries/query5_sales_growth.sql)  
-**Result:** [query5_results.csv](results/query5_results.csv)
+**File:** [query5_daily_sales](query5_daily_sales)
 
 Shows cumulative sales and moving averages by order sequence.
+
+![Query 5 Result](query_5.png)
+
+---
+
+## Screenshots Gallery
+
+### AWS Infrastructure
+![Image Overview](image.png)
 
 ## Key Challenges
 
@@ -98,22 +122,22 @@ Shows cumulative sales and moving averages by order sequence.
 ## Repository Structure
 ```
 ├── README.md
-├── queries/
-│   ├── query1_cumulative_sales.sql
-│   ├── query2_geographic_hotspot.sql
-│   ├── query3_category_performance.sql
-│   ├── query4_top_products.sql
-│   └── query5_sales_growth.sql
-├── results/
-│   ├── query1_results.csv
-│   ├── query2_results.csv
-│   ├── query3_results.csv
-│   ├── query4_results.csv
-│   └── query5_results.csv
-└── screenshots/
-    ├── s3_buckets.png
-    ├── iam_role.png
-    └── cloudwatch_logs.png
+├── Query_1_cumulative_sales
+├── Query2_geo_hotspot
+├── Query3_sales_performance
+├── query4_top_3_sku
+├── query5_daily_sales
+├── cloudwatch.png
+├── crawler.png
+├── db_glue.png
+├── first_describe_command.png
+├── iam_creation.png
+├── image.png
+├── query_1_result.png
+├── query_2.png
+├── query_3.png
+├── query_4.png
+└── query_5.png
 ```
 
 ## Cleanup

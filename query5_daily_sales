@@ -1,0 +1,20 @@
+WITH order_sequence AS (
+    SELECT 
+        "order id" AS order_id,
+        date,
+        amount,
+        qty,
+        "ship-city" AS city,
+        ROW_NUMBER() OVER (ORDER BY "order id") AS order_sequence
+    FROM rawdevanand_handson
+)
+SELECT 
+    order_sequence,
+    order_id,
+    date,
+    amount,
+    SUM(amount) OVER (ORDER BY order_sequence) AS running_total_sales,
+    AVG(amount) OVER (ORDER BY order_sequence ROWS BETWEEN 9 PRECEDING AND CURRENT ROW) AS moving_avg_10_orders
+FROM order_sequence
+ORDER BY order_sequence
+LIMIT 10;

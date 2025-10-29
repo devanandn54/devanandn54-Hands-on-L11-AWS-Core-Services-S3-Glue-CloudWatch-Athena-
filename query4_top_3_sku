@@ -1,0 +1,23 @@
+WITH ranked_products AS (
+    SELECT 
+        category,
+        sku,
+        SUM(amount) AS total_sales,
+        SUM(qty) AS total_quantity,
+        COUNT(*) AS order_count,
+        ROW_NUMBER() OVER (PARTITION BY category ORDER BY SUM(amount) DESC) AS rank
+    FROM rawdevanand_handson
+    WHERE category IS NOT NULL 
+        AND sku IS NOT NULL
+    GROUP BY category, sku
+)
+SELECT 
+    category,
+    sku AS product,
+    total_sales,
+    total_quantity,
+    order_count,
+    rank
+FROM ranked_products
+WHERE rank <= 3
+ORDER BY category, rank;
